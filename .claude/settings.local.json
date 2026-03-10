@@ -10,7 +10,8 @@
       "WebFetch(domain:dl.google.com)",
       "Bash(curl:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(./gradlew assembleDebug:*)"
+      "Bash(./gradlew assembleDebug:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
