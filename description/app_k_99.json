@@ -1,0 +1,750 @@
+{
+  "project": {
+    "name": "Cricket Festival Planner",
+    "platform": [
+      "Android"
+    ],
+    "language": "Kotlin",
+    "minimumOSVersion": "8.0",
+    "architecture": "MVVM",
+    "dependencies": [
+      "androidx.lifecycle",
+      "Room",
+      "Material Components",
+      "Kotlin Coroutines"
+    ],
+    "version": "1.0"
+  },
+  "designSystem": {
+    "theme": "Light",
+    "colors": {
+      "primaryBackground": "#F9FAFB",
+      "secondaryBackground": "#FFFFFF",
+      "primaryAccent": "#2176FF",
+      "secondaryAccent": "#4B9BFF",
+      "textPrimary": "#1A1A1A",
+      "textSecondary": "#4A4A4A",
+      "divider": "#E3E8EF",
+      "success": "#31C48D",
+      "error": "#F05252",
+      "warning": "#FACC15",
+      "info": "#3B82F6"
+    },
+    "typography": {
+      "fontFamily": "Roboto",
+      "headingWeight": 700,
+      "bodyWeight": 400,
+      "captionWeight": 400,
+      "headingSize": 22,
+      "bodySize": 16,
+      "captionSize": 13
+    },
+    "spacing": {
+      "xs": 4,
+      "sm": 8,
+      "md": 16,
+      "lg": 24,
+      "xl": 32
+    },
+    "radius": {
+      "sm": 6,
+      "md": 12,
+      "lg": 20
+    },
+    "elevation": {
+      "card": 2,
+      "modal": 8,
+      "fab": 12
+    }
+  },
+  "app": {
+    "entryPoint": "MainActivity.kt",
+    "lifecycle": "SingleActivity",
+    "preloader": {
+      "screenName": "PreloaderScreen",
+      "animationType": "CircularLoader",
+      "initializationLogic": "App checks local storage, loads theme, verifies dependencies, and prepares user data.",
+      "dependencyChecks": [
+        "Room database",
+        "Theme files",
+        "User preferences"
+      ],
+      "themeLoading": "Loads Light theme and applies accent colors.",
+      "transitionLogic": "On completion, navigates to OnboardingScreen or HomeScreen based on user status."
+    },
+    "navigation": {
+      "type": "BottomTabNavigation",
+      "structure": [
+        {
+          "tab": "Home",
+          "destination": "HomeScreen"
+        },
+        {
+          "tab": "Tournaments",
+          "destination": "TournamentListScreen"
+        },
+        {
+          "tab": "Analytics",
+          "destination": "AnalyticsScreen"
+        },
+        {
+          "tab": "Settings",
+          "destination": "SettingsScreen"
+        }
+      ]
+    },
+    "features": [
+      {
+        "screenName": "OnboardingScreen1",
+        "view": "OnboardingView1",
+        "viewModel": "OnboardingViewModel",
+        "screenType": "Onboarding",
+        "primaryPurpose": "Introduce app purpose and main features",
+        "userActions": [
+          "Next"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "none",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "OnboardingScreen2"
+        ],
+        "loadingState": "idle",
+        "emptyState": "hidden",
+        "errorState": "hidden",
+        "retryBehavior": "none"
+      },
+      {
+        "screenName": "OnboardingScreen2",
+        "view": "OnboardingView2",
+        "viewModel": "OnboardingViewModel",
+        "screenType": "Onboarding",
+        "primaryPurpose": "Explain tournament setup and customization",
+        "userActions": [
+          "Next",
+          "Back"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "none",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "OnboardingScreen3",
+          "OnboardingScreen1"
+        ],
+        "loadingState": "idle",
+        "emptyState": "hidden",
+        "errorState": "hidden",
+        "retryBehavior": "none"
+      },
+      {
+        "screenName": "OnboardingScreen3",
+        "view": "OnboardingView3",
+        "viewModel": "OnboardingViewModel",
+        "screenType": "Onboarding",
+        "primaryPurpose": "Showcase result tracking and tournament history",
+        "userActions": [
+          "Finish",
+          "Back"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "none",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "HomeScreen",
+          "OnboardingScreen2"
+        ],
+        "loadingState": "idle",
+        "emptyState": "hidden",
+        "errorState": "hidden",
+        "retryBehavior": "none"
+      },
+      {
+        "screenName": "HomeScreen",
+        "view": "HomeView",
+        "viewModel": "HomeViewModel",
+        "screenType": "Home",
+        "primaryPurpose": "Display active tournaments and quick actions",
+        "userActions": [
+          "View Tournament",
+          "Create Tournament",
+          "Open Analytics",
+          "Open Settings"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "session",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "TournamentListScreen",
+          "CreateTournamentScreen",
+          "AnalyticsScreen",
+          "SettingsScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "TournamentListScreen",
+        "view": "TournamentListView",
+        "viewModel": "TournamentListViewModel",
+        "screenType": "List",
+        "primaryPurpose": "Overview of all tournaments",
+        "userActions": [
+          "Select Tournament",
+          "Archive Tournament",
+          "Filter List"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "persistent",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "TournamentDetailScreen",
+          "CreateTournamentScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "TournamentDetailScreen",
+        "view": "TournamentDetailView",
+        "viewModel": "TournamentDetailViewModel",
+        "screenType": "Detail",
+        "primaryPurpose": "Show tournament details, schedule, and results",
+        "userActions": [
+          "Edit Tournament",
+          "View Schedule",
+          "View Table",
+          "View Analytics"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "session",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "EditTournamentScreen",
+          "MatchScheduleScreen",
+          "TournamentTableScreen",
+          "AnalyticsScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "CreateTournamentScreen",
+        "view": "CreateTournamentView",
+        "viewModel": "CreateTournamentViewModel",
+        "screenType": "Create/Edit",
+        "primaryPurpose": "Create a new tournament with custom format",
+        "userActions": [
+          "Save",
+          "Cancel"
+        ],
+        "inputFields": [
+          {
+            "fieldName": "tournamentName",
+            "fieldType": "text",
+            "required": true,
+            "validationGroup": "textFieldRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "matchType",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "T20",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "teamCount",
+            "fieldType": "numeric",
+            "required": true,
+            "validationGroup": "numericFieldRules",
+            "defaultValue": 4,
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "pointSystem",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "Standard",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "structure",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "Round Robin",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "duration",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "Weekend",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "location",
+            "fieldType": "text",
+            "required": false,
+            "validationGroup": "textFieldRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "posterImage",
+            "fieldType": "image",
+            "required": false,
+            "validationGroup": "imageRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          }
+        ],
+        "validationReference": "formSubmissionPolicy",
+        "dataReadFrom": "local",
+        "dataWriteTo": "local",
+        "cachingPolicy": "persistent",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "MatchScheduleScreen",
+          "HomeScreen"
+        ],
+        "loadingState": "saving",
+        "emptyState": "hidden",
+        "errorState": "show error",
+        "retryBehavior": "retry save"
+      },
+      {
+        "screenName": "MatchScheduleScreen",
+        "view": "MatchScheduleView",
+        "viewModel": "MatchScheduleViewModel",
+        "screenType": "Core Feature",
+        "primaryPurpose": "View and edit match schedule",
+        "userActions": [
+          "Edit Pair",
+          "Change Time",
+          "Mark Complete"
+        ],
+        "inputFields": [
+          {
+            "fieldName": "matchTime",
+            "fieldType": "date",
+            "required": true,
+            "validationGroup": "dateFieldRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "teams",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          }
+        ],
+        "validationReference": "formSubmissionPolicy",
+        "dataReadFrom": "local",
+        "dataWriteTo": "local",
+        "cachingPolicy": "session",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "MatchResultScreen",
+          "TournamentDetailScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "MatchResultScreen",
+        "view": "MatchResultView",
+        "viewModel": "MatchResultViewModel",
+        "screenType": "Core Feature",
+        "primaryPurpose": "Input match results and best players",
+        "userActions": [
+          "Save Result",
+          "Select Best Player"
+        ],
+        "inputFields": [
+          {
+            "fieldName": "finalScore",
+            "fieldType": "numeric",
+            "required": true,
+            "validationGroup": "numericFieldRules",
+            "defaultValue": 0,
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "bestPlayer",
+            "fieldType": "selection",
+            "required": false,
+            "validationGroup": "selectionRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          }
+        ],
+        "validationReference": "formSubmissionPolicy",
+        "dataReadFrom": "local",
+        "dataWriteTo": "local",
+        "cachingPolicy": "session",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "TournamentTableScreen",
+          "MatchScheduleScreen"
+        ],
+        "loadingState": "saving",
+        "emptyState": "hidden",
+        "errorState": "show error",
+        "retryBehavior": "retry save"
+      },
+      {
+        "screenName": "TournamentTableScreen",
+        "view": "TournamentTableView",
+        "viewModel": "TournamentTableViewModel",
+        "screenType": "Core Feature",
+        "primaryPurpose": "Display tournament table and rankings",
+        "userActions": [
+          "Filter Group",
+          "View Details"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "session",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "TournamentDetailScreen",
+          "AnalyticsScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "AnalyticsScreen",
+        "view": "AnalyticsView",
+        "viewModel": "AnalyticsViewModel",
+        "screenType": "Analytics",
+        "primaryPurpose": "Show statistics and performance analytics",
+        "userActions": [
+          "Export Data",
+          "Compare Seasons"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "persistent",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "HomeScreen",
+          "TournamentListScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "TournamentHistoryScreen",
+        "view": "TournamentHistoryView",
+        "viewModel": "TournamentHistoryViewModel",
+        "screenType": "List",
+        "primaryPurpose": "Archive of past tournaments",
+        "userActions": [
+          "View Details",
+          "Reuse Format"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "none",
+        "cachingPolicy": "persistent",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "TournamentDetailScreen",
+          "CreateTournamentScreen"
+        ],
+        "loadingState": "loading",
+        "emptyState": "show message",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      },
+      {
+        "screenName": "EditTournamentScreen",
+        "view": "EditTournamentView",
+        "viewModel": "EditTournamentViewModel",
+        "screenType": "Create/Edit",
+        "primaryPurpose": "Edit tournament format and details",
+        "userActions": [
+          "Save Changes",
+          "Cancel"
+        ],
+        "inputFields": [
+          {
+            "fieldName": "tournamentName",
+            "fieldType": "text",
+            "required": true,
+            "validationGroup": "textFieldRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "matchType",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "T20",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "teamCount",
+            "fieldType": "numeric",
+            "required": true,
+            "validationGroup": "numericFieldRules",
+            "defaultValue": 4,
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "pointSystem",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "Standard",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "structure",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "Round Robin",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "duration",
+            "fieldType": "selection",
+            "required": true,
+            "validationGroup": "selectionRules",
+            "defaultValue": "Weekend",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "location",
+            "fieldType": "text",
+            "required": false,
+            "validationGroup": "textFieldRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          },
+          {
+            "fieldName": "posterImage",
+            "fieldType": "image",
+            "required": false,
+            "validationGroup": "imageRules",
+            "defaultValue": "",
+            "storageLocation": "local"
+          }
+        ],
+        "validationReference": "formSubmissionPolicy",
+        "dataReadFrom": "local",
+        "dataWriteTo": "local",
+        "cachingPolicy": "persistent",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "TournamentDetailScreen",
+          "HomeScreen"
+        ],
+        "loadingState": "saving",
+        "emptyState": "hidden",
+        "errorState": "show error",
+        "retryBehavior": "retry save"
+      },
+      {
+        "screenName": "SettingsScreen",
+        "view": "SettingsView",
+        "viewModel": "SettingsViewModel",
+        "screenType": "Settings",
+        "primaryPurpose": "Manage app, privacy, and user preferences",
+        "userActions": [
+          "Change Theme",
+          "Rate App",
+          "Share App",
+          "Reset Settings",
+          "Clear Local Data",
+          "Export Data",
+          "Import Data",
+          "View Privacy Policy"
+        ],
+        "inputFields": [],
+        "validationReference": "globalRules",
+        "dataReadFrom": "local",
+        "dataWriteTo": "local",
+        "cachingPolicy": "persistent",
+        "offlineBehavior": "full",
+        "connectedServices": [],
+        "navigationLinks": [
+          "HomeScreen"
+        ],
+        "loadingState": "idle",
+        "emptyState": "hidden",
+        "errorState": "show error",
+        "retryBehavior": "reload"
+      }
+    ],
+    "services": [
+      {
+        "serviceName": "LocalDatabase",
+        "serviceType": "Room",
+        "persistence": "persistent",
+        "sync": "manual",
+        "scope": "app-wide"
+      },
+      {
+        "serviceName": "ThemeManager",
+        "serviceType": "local",
+        "persistence": "session",
+        "sync": "none",
+        "scope": "user"
+      },
+      {
+        "serviceName": "ExportImportService",
+        "serviceType": "local",
+        "persistence": "manual",
+        "sync": "manual",
+        "scope": "user"
+      }
+    ],
+    "validation": {
+      "globalRules": {
+        "constraints": "All required fields must be filled; no empty submissions.",
+        "errorMessage": "Please complete all required fields.",
+        "systemBehavior": "Block submission and highlight errors."
+      },
+      "textFieldRules": {
+        "constraints": "Max 40 chars; no special symbols except space and dash.",
+        "errorMessage": "Text must be under 40 characters and contain only allowed symbols.",
+        "systemBehavior": "Show inline error and block field."
+      },
+      "numericFieldRules": {
+        "constraints": "Positive integers only; min 2, max 32.",
+        "errorMessage": "Value must be a positive integer between 2 and 32.",
+        "systemBehavior": "Show inline error and block field."
+      },
+      "dateFieldRules": {
+        "constraints": "Valid date/time; not in the past.",
+        "errorMessage": "Date/time must be valid and not in the past.",
+        "systemBehavior": "Show inline error and block field."
+      },
+      "imageRules": {
+        "constraints": "JPG/PNG only; max 2MB.",
+        "errorMessage": "Image must be JPG or PNG and under 2MB.",
+        "systemBehavior": "Show inline error and block field."
+      },
+      "selectionRules": {
+        "constraints": "Selection required from predefined options.",
+        "errorMessage": "Please select an option.",
+        "systemBehavior": "Show inline error and block field."
+      },
+      "errorHandlingStrategy": {
+        "constraints": "All errors logged; user notified for critical failures.",
+        "errorMessage": "An error occurred. Please try again.",
+        "systemBehavior": "Show dialog and allow retry."
+      },
+      "formSubmissionPolicy": {
+        "constraints": "All validations must pass before submission.",
+        "errorMessage": "Please correct errors before submitting.",
+        "systemBehavior": "Block submission and scroll to first error."
+      }
+    },
+    "components": [
+      "Button",
+      "TextField",
+      "SelectionInput",
+      "DatePicker",
+      "ImagePicker",
+      "Card",
+      "TabBar",
+      "BottomNavigation",
+      "Loader",
+      "Snackbar",
+      "Dialog"
+    ],
+    "ratingFlow": {
+      "implementation": "Native",
+      "api": "In-App Review API",
+      "threshold": 4,
+      "feedbackForm": false,
+      "validationRules": {
+        "constraints": "Rating must be 1–5 stars.",
+        "errorMessage": "Please select a rating.",
+        "systemBehavior": "Block submission if not selected."
+      },
+      "redirectCondition": "If rating >= 4, prompt for Play Store review; else, show thank you."
+    },
+    "notificationFlows": [
+      {
+        "notificationType": "TournamentReminder",
+        "title": "Upcoming Match",
+        "body": "Your next cricket match is scheduled soon. Check the schedule for details.",
+        "triggerCondition": "1 hour before match start",
+        "frequency": "per match",
+        "deepLinkDestination": "MatchScheduleScreen",
+        "relatedFeature": "MatchSchedule"
+      },
+      {
+        "notificationType": "ResultEntryReminder",
+        "title": "Enter Match Result",
+        "body": "Don't forget to enter the result for your recent match.",
+        "triggerCondition": "30 minutes after match end",
+        "frequency": "per match",
+        "deepLinkDestination": "MatchResultScreen",
+        "relatedFeature": "MatchResult"
+      }
+    ]
+  }
+}

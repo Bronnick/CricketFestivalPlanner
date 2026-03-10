@@ -1,0 +1,25 @@
+Cricket Festival Planner is a specialized application designed for organizing and managing local cricket tournaments, aimed at enthusiasts, school teams, and neighborhood leagues in India and other countries where the sport is popular. The application addresses the lack of convenient tools for independently running informal competitions by providing users with flexible options for configuring tournament formats, automating schedules, recording results, and analyzing statistics. The product is positioned as a universal planner and archive for cricket events, enabling communities to quickly launch new tournaments, preserve historical records, and share achievements. Interaction within the app is built on principles of maximum customization, transparency, and simplicity, making Cricket Festival Planner an indispensable tool for both organizers and participants.
+
+The user journey begins with a loading screen where the application initializes, checks local dependencies, loads the theme, and prepares data. After successful initialization, the user is presented with a series of onboarding screens introducing the core features: tournament creation, format configuration, schedule management, and statistics tracking. The onboarding sequence concludes with a short interface demonstration and a transition to the main screen.
+
+The preloader screen is implemented with a CircularLoader animation that displays the initialization process, verification of local storage, loading of user settings, and application theme preparation. After all checks are completed, the app smoothly transitions either to the onboarding flow or directly to the home screen depending on the user’s status.
+
+On the first onboarding screen, the user receives information about the purpose of the application and its key functions. The second screen explains tournament setup in more detail, including selecting the tournament format, defining the number of teams, and choosing the scoring system. The third screen demonstrates the capabilities for tracking results, maintaining statistics, and viewing tournament history. After completing onboarding, the user is taken to the home screen.
+
+The home screen serves as the central control hub. It displays active tournaments, quick actions for creating new events, and links to the history and analytics sections. From here, the user can either open an existing tournament or start creating a new one.
+
+The tournament creation screen provides extended configuration options: entering a tournament name, selecting the match format, defining the number of teams, choosing the competition structure (round-robin, playoffs), and specifying duration and venue. All fields include validation and contextual hints. Once the data is saved, the application automatically generates a match schedule that can later be manually adjusted.
+
+The match schedule screen allows users to view all match pairings, modify the order and timing of games, and mark matches as completed. Each match provides access to a detailed result entry screen.
+
+The match result input screen supports step-by-step entry of the final score, selection of the best players, and recording of additional events. After saving, the results automatically update the tournament standings and team statistics.
+
+The standings screen displays the current positions of teams, accumulated points, run differences, and rankings. Users can filter the data by groups and tournament stages. All changes are reflected in real time.
+
+The analytics screen provides advanced statistics including individual and team performance metrics, point dynamics, season comparisons, and visualizations of progress. All data can be exported or archived.
+
+The tournament history screen contains an archive of all completed events with the ability to view details, relaunch the same format, or create a new tournament based on a previous template.
+
+The settings screen includes profile management, theme selection, local data cleanup, settings reset, viewing the privacy policy, rating the application through the In-App Review API, as well as data export and import features. All changes are applied instantly and stored in local storage.
+
+The visual system of the application is based on a light theme with an accent on a rich blue color (#2176FF) and additional shades for highlighting interactive elements. Typography uses modern fonts with a clear hierarchy of headings and body text. The interface emphasizes readability, adaptive spacing, and rounded components. Animations are smooth and used for screen transitions and user action confirmations, creating a dynamic and modern experience.

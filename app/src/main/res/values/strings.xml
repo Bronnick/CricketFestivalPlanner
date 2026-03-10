@@ -1,0 +1,159 @@
+<resources>
+    <string name="app_name">Cricket Festival Planner</string>
+
+    <!-- Generic -->
+    <string name="btn_next">Next</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_finish">Get Started</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_retry">Retry</string>
+    <string name="btn_create">Create</string>
+    <string name="btn_edit">Edit</string>
+    <string name="loading">Loading…</string>
+    <string name="saving">Saving…</string>
+    <string name="error_generic">An error occurred. Please try again.</string>
+    <string name="error_required_fields">Please complete all required fields.</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_tournaments">Tournaments</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_1_title">Welcome to Cricket Festival Planner</string>
+    <string name="onboarding_1_subtitle">Organize local cricket tournaments with ease — for schools, neighborhoods, and leagues.</string>
+    <string name="onboarding_2_title">Set Up Your Tournament</string>
+    <string name="onboarding_2_subtitle">Choose your match format, number of teams, competition structure, and scoring system.</string>
+    <string name="onboarding_3_title">Track Results &amp; History</string>
+    <string name="onboarding_3_subtitle">Record match results, view live standings, and archive all your past tournaments.</string>
+
+    <!-- Home -->
+    <string name="home_active_tournaments">Active Tournaments</string>
+    <string name="home_empty">No active tournaments yet.\nTap the button below to create one.</string>
+    <string name="home_quick_create">Create Tournament</string>
+    <string name="home_view_all">View All</string>
+    <string name="home_welcome">Good day, Organizer!</string>
+    <string name="home_welcome_name">Good day, %s!</string>
+    <string name="home_subtitle">Here\'s what\'s happening today</string>
+
+    <!-- Tournament List -->
+    <string name="tournament_list_title">Tournaments</string>
+    <string name="tournament_list_empty">No tournaments found.</string>
+    <string name="tournament_filter_active">Active</string>
+    <string name="tournament_filter_completed">Completed</string>
+    <string name="tournament_filter_all">All</string>
+
+    <!-- Tournament Detail -->
+    <string name="tournament_detail_schedule">Schedule</string>
+    <string name="tournament_detail_table">Standings</string>
+    <string name="tournament_detail_analytics">Analytics</string>
+    <string name="tournament_detail_teams">Teams</string>
+    <string name="tournament_detail_format">Format</string>
+    <string name="tournament_detail_structure">Structure</string>
+    <string name="tournament_detail_location">Location</string>
+    <string name="tournament_detail_edit">Edit Tournament</string>
+    <string name="tournament_complete">Mark as Completed</string>
+    <string name="tournament_complete_title">Complete Tournament</string>
+    <string name="tournament_complete_confirm">Mark this tournament as completed? It will be moved to history and can no longer be edited.</string>
+
+    <!-- Create / Edit Tournament -->
+    <string name="create_tournament_title">Create Tournament</string>
+    <string name="edit_tournament_title">Edit Tournament</string>
+    <string name="field_tournament_name">Tournament Name</string>
+    <string name="field_match_type">Match Format</string>
+    <string name="field_team_count">Number of Teams</string>
+    <string name="field_point_system">Point System</string>
+    <string name="field_structure">Competition Structure</string>
+    <string name="field_duration">Duration</string>
+    <string name="field_location">Venue (optional)</string>
+    <string name="field_team_name">Team %d Name</string>
+    <string name="create_tournament_teams_section">Team Names</string>
+    <string name="error_name_empty">Tournament name is required.</string>
+    <string name="error_name_too_long">Name must be under 40 characters.</string>
+    <string name="error_team_count">Number of teams must be between 2 and 32.</string>
+    <string name="error_team_name_empty">Team name is required.</string>
+    <string name="hint_tournament_name">e.g. Summer Cup 2025</string>
+    <string name="hint_location">e.g. City Cricket Ground</string>
+
+    <!-- Match Schedule -->
+    <string name="match_schedule_title">Match Schedule</string>
+    <string name="match_schedule_empty">No matches scheduled yet.</string>
+    <string name="match_round">Round %d</string>
+    <string name="match_vs">vs</string>
+    <string name="match_completed">Completed</string>
+    <string name="match_pending">Pending</string>
+    <string name="match_enter_result">Enter Result</string>
+    <string name="match_time">Scheduled: %s</string>
+
+    <!-- Match Result -->
+    <string name="match_result_title">Match Result</string>
+    <string name="field_home_score">%s Score</string>
+    <string name="field_away_score">%s Score</string>
+    <string name="field_best_player">Best Player (optional)</string>
+    <string name="error_score_invalid">Score must be a positive number.</string>
+    <string name="result_saved">Result saved successfully.</string>
+
+    <!-- Standings -->
+    <string name="standings_title">Standings</string>
+    <string name="standings_team">Team</string>
+    <string name="standings_played">P</string>
+    <string name="standings_won">W</string>
+    <string name="standings_lost">L</string>
+    <string name="standings_points">Pts</string>
+    <string name="standings_run_diff">+/-</string>
+    <string name="standings_empty">No results recorded yet.</string>
+
+    <!-- Analytics -->
+    <string name="analytics_title">Analytics</string>
+    <string name="analytics_total_tournaments">Total Tournaments</string>
+    <string name="analytics_total_matches">Total Matches Played</string>
+    <string name="analytics_top_team">Top Performing Team</string>
+    <string name="analytics_empty">No data available yet.\nCreate your first tournament to see analytics.</string>
+    <string name="analytics_export">Export Data</string>
+    <string name="analytics_breakdown_title">Tournament Breakdown</string>
+    <string name="analytics_matches_played">Played</string>
+    <string name="analytics_matches_total">Total</string>
+    <string name="analytics_completion">Done</string>
+
+    <!-- History -->
+    <string name="history_title">Tournament History</string>
+    <string name="history_empty">No completed tournaments yet.</string>
+    <string name="history_reuse">Reuse Format</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_general">General</string>
+    <string name="settings_organizer_name">Your Name</string>
+    <string name="settings_organizer_name_hint">e.g. John Smith</string>
+    <string name="settings_section_data">Data</string>
+    <string name="settings_section_about">About</string>
+    <string name="settings_rate_app">Rate App</string>
+    <string name="settings_share_app">Share App</string>
+    <string name="settings_export_data">Export Data</string>
+    <string name="settings_import_data">Import Data</string>
+    <string name="settings_clear_data">Clear Local Data</string>
+    <string name="settings_reset_settings">Reset Settings</string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
+    <string name="settings_version">Version %s</string>
+    <string name="settings_clear_data_confirm">This will permanently delete all your tournament data. Are you sure?</string>
+    <string name="settings_clear_data_success">All data cleared.</string>
+    <string name="settings_export_success">Data exported successfully.</string>
+    <string name="settings_import_success">Data imported successfully.</string>
+    <string name="settings_export_error">Export failed. Please try again.</string>
+    <string name="settings_import_error">Import failed. The file may be invalid.</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="share_app_text">Check out Cricket Festival Planner — the best app for organizing local cricket tournaments!</string>
+
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_intro">Cricket Festival Planner is committed to protecting your privacy. This policy explains how we handle your data.</string>
+    <string name="privacy_policy_data_title">Data We Collect</string>
+    <string name="privacy_policy_data_body">This app does not collect or transmit any personal data. All tournament information, match results, and team data you enter are stored exclusively on your device.</string>
+    <string name="privacy_policy_storage_title">Local Storage</string>
+    <string name="privacy_policy_storage_body">All data is stored locally using a Room database and Android DataStore. No data is sent to external servers. You can export or delete your data at any time from the Settings screen.</string>
+    <string name="privacy_policy_contact_title">Contact</string>
+    <string name="privacy_policy_contact_body">If you have any questions about this privacy policy, please contact us through the app store listing.</string>
+</resources>
