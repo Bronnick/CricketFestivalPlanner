@@ -24,7 +24,8 @@ fun AppTextField(
     errorMessage: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     singleLine: Boolean = true,
-    maxLines: Int = 1
+    maxLines: Int = 1,
+    maxLength: Int = Int.MAX_VALUE
 ) {
     val colors = LocalAppTheme.colors
     val typo = LocalAppTheme.typography
@@ -33,7 +34,7 @@ fun AppTextField(
     Column(modifier = modifier) {
         OutlinedTextField(
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { if (it.length <= maxLength) onValueChange(it) },
             label = { Text(text = label, style = typo.caption) },
             placeholder = if (placeholder.isNotEmpty()) {
                 { Text(text = placeholder, style = typo.bodyMedium, color = colors.textSecondary) }
@@ -44,6 +45,9 @@ fun AppTextField(
             keyboardOptions = keyboardOptions,
             shape = shapes.medium,
             colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = colors.textPrimary,
+                unfocusedTextColor = colors.textPrimary,
+                errorTextColor = colors.textPrimary,
                 focusedBorderColor = colors.accent,
                 unfocusedBorderColor = colors.divider,
                 errorBorderColor = colors.error,

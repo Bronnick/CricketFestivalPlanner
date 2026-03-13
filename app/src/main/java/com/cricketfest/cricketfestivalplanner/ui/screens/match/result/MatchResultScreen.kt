@@ -88,7 +88,8 @@ fun MatchResultScreen(matchId: Long, navController: NavController) {
                     label = stringResource(R.string.field_home_score, match.homeTeamName),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     isError = uiState.homeScoreError,
-                    errorMessage = if (uiState.homeScoreError) stringResource(R.string.error_score_invalid) else ""
+                    errorMessage = if (uiState.homeScoreError) stringResource(R.string.error_score_invalid) else "",
+                    maxLength = 5
                 )
 
                 AppTextField(
@@ -97,13 +98,15 @@ fun MatchResultScreen(matchId: Long, navController: NavController) {
                     label = stringResource(R.string.field_away_score, match.awayTeamName),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     isError = uiState.awayScoreError,
-                    errorMessage = if (uiState.awayScoreError) stringResource(R.string.error_score_invalid) else ""
+                    errorMessage = if (uiState.awayScoreError) stringResource(R.string.error_score_invalid) else "",
+                    maxLength = 5
                 )
 
                 AppTextField(
                     value = uiState.bestPlayer,
                     onValueChange = { viewModel.updateBestPlayer(it) },
-                    label = stringResource(R.string.field_best_player)
+                    label = stringResource(R.string.field_best_player),
+                    maxLength = 50
                 )
 
                 Spacer(modifier = Modifier.height(dimens.spacingSm))

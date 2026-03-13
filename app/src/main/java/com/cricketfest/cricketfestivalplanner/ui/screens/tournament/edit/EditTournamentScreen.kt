@@ -86,7 +86,8 @@ fun EditTournamentScreen(tournamentId: Long, navController: NavController) {
                     onValueChange = { viewModel.updateName(it) },
                     label = stringResource(R.string.field_tournament_name),
                     isError = uiState.nameError != null,
-                    errorMessage = if (uiState.nameError != null) stringResource(R.string.error_name_empty) else ""
+                    errorMessage = if (uiState.nameError != null) stringResource(R.string.error_name_empty) else "",
+                    maxLength = 40
                 )
 
                 EditDropdownField(
@@ -116,7 +117,8 @@ fun EditTournamentScreen(tournamentId: Long, navController: NavController) {
                 AppTextField(
                     value = uiState.location,
                     onValueChange = { viewModel.updateLocation(it) },
-                    label = stringResource(R.string.field_location)
+                    label = stringResource(R.string.field_location),
+                    maxLength = 100
                 )
 
                 Spacer(modifier = Modifier.height(dimens.spacingSm))

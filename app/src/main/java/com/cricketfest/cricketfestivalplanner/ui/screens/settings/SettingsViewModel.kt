@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 data class SettingsUiState(
     val isLoading: Boolean = false,
     val showClearDataDialog: Boolean = false,
-    val message: String? = null
+    val message: String? = null,
+    val navigateToHome: Boolean = false
 )
 
 class SettingsViewModel(
@@ -28,9 +29,18 @@ class SettingsViewModel(
     val organizerName: StateFlow<String> = preferencesDataStore.organizerName
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "")
 
+    val selectedTheme: StateFlow<String> = preferencesDataStore.selectedTheme
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "Light")
+
     fun updateOrganizerName(name: String) {
         viewModelScope.launch {
             preferencesDataStore.setOrganizerName(name)
+        }
+    }
+
+    fun updateTheme(theme: String) {
+        viewModelScope.launch {
+            preferencesDataStore.setTheme(theme)
         }
     }
 
@@ -54,6 +64,8 @@ class SettingsViewModel(
     fun resetSettings() {
         viewModelScope.launch {
             preferencesDataStore.setTheme("Light")
+            preferencesDataStore.setOrganizerName("")
+            _uiState.value = _uiState.value.copy(message = "reset_success")
         }
     }
 
@@ -74,12 +86,17 @@ class SettingsViewModel(
             val result = backupManager.importFromUri(uri)
             _uiState.value = _uiState.value.copy(
                 isLoading = false,
-                message = if (result.isSuccess) "import_success" else "import_error"
+                message = if (result.isSuccess) "import_success" else "import_error",
+                navigateToHome = result.isSuccess
             )
         }
     }
 
     fun dismissMessage() {
         _uiState.value = _uiState.value.copy(message = null)
+    }
+
+    fun dismissNavigateToHome() {
+        _uiState.value = _uiState.value.copy(navigateToHome = false)
     }
 }

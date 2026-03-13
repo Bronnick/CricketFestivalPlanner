@@ -8,6 +8,7 @@ import com.cricketfest.cricketfestivalplanner.data.repository.MatchRepository
 import com.cricketfest.cricketfestivalplanner.data.repository.MatchRepositoryImpl
 import com.cricketfest.cricketfestivalplanner.data.repository.TournamentRepository
 import com.cricketfest.cricketfestivalplanner.data.repository.TournamentRepositoryImpl
+import com.cricketfest.cricketfestivalplanner.MainViewModel
 import com.cricketfest.cricketfestivalplanner.ui.screens.analytics.AnalyticsViewModel
 import com.cricketfest.cricketfestivalplanner.ui.screens.home.HomeViewModel
 import com.cricketfest.cricketfestivalplanner.ui.screens.match.result.MatchResultViewModel
@@ -53,6 +54,7 @@ val appModule = module {
     single<MatchRepository> { MatchRepositoryImpl(get(), get()) }
 
     // ViewModels
+    viewModel { MainViewModel(get()) }
     viewModel { PreloaderViewModel(get()) }
     viewModel { OnboardingViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }

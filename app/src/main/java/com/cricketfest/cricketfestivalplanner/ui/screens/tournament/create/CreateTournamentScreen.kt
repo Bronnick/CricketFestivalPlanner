@@ -99,7 +99,8 @@ fun CreateTournamentScreen(navController: NavController, templateId: Long? = nul
                     "required" -> stringResource(R.string.error_name_empty)
                     "too_long" -> stringResource(R.string.error_name_too_long)
                     else -> ""
-                }
+                },
+                maxLength = 40
             )
 
             // Match type dropdown
@@ -117,7 +118,8 @@ fun CreateTournamentScreen(navController: NavController, templateId: Long? = nul
                 label = stringResource(R.string.field_team_count),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 isError = uiState.teamCountError != null,
-                errorMessage = if (uiState.teamCountError != null) stringResource(R.string.error_team_count) else ""
+                errorMessage = if (uiState.teamCountError != null) stringResource(R.string.error_team_count) else "",
+                maxLength = 2
             )
 
             // Point system
@@ -149,7 +151,8 @@ fun CreateTournamentScreen(navController: NavController, templateId: Long? = nul
                 value = uiState.location,
                 onValueChange = { viewModel.updateLocation(it) },
                 label = stringResource(R.string.field_location),
-                placeholder = stringResource(R.string.hint_location)
+                placeholder = stringResource(R.string.hint_location),
+                maxLength = 100
             )
 
             // Team names
@@ -164,7 +167,8 @@ fun CreateTournamentScreen(navController: NavController, templateId: Long? = nul
                     onValueChange = { viewModel.updateTeamName(index, it) },
                     label = "Team ${index + 1}",
                     isError = uiState.teamNameErrors.getOrNull(index) != null,
-                    errorMessage = if (uiState.teamNameErrors.getOrNull(index) != null) stringResource(R.string.error_team_name_empty) else ""
+                    errorMessage = if (uiState.teamNameErrors.getOrNull(index) != null) stringResource(R.string.error_team_name_empty) else "",
+                    maxLength = 30
                 )
             }
 

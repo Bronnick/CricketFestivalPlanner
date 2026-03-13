@@ -4,9 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
-fun AppTheme(content: @Composable () -> Unit) {
+fun AppTheme(theme: String = "Light", content: @Composable () -> Unit) {
+    val colorTokens = if (theme == "Dark") DarkColorTokens else LightColorTokens
     CompositionLocalProvider(
-        LocalColorTokens provides LightColorTokens,
+        LocalColorTokens provides colorTokens,
         LocalTypographyTokens provides DefaultTypographyTokens,
         LocalShapeTokens provides DefaultShapeTokens,
         LocalDimensionTokens provides DefaultDimensionTokens

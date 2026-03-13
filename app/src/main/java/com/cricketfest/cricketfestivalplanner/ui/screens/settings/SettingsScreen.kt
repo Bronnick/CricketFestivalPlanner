@@ -5,7 +5,9 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +17,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Divider
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -28,6 +32,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -47,19 +52,21 @@ fun SettingsScreen(navController: NavController) {
     val viewModel: SettingsViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsState()
     val organizerName by viewModel.organizerName.collectAsState()
+    val selectedTheme by viewModel.selectedTheme.collectAsState()
     val colors = LocalAppTheme.colors
     val typo = LocalAppTheme.typography
     val dimens = LocalAppTheme.dimens
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
 
-    var nameInput by rememberSaveable(organizerName) { mutableStateOf(organizerName) }
+    var nameInput by rememberSaveable { mutableStateOf(organizerName) }
 
     val clearSuccessMsg = stringResource(R.string.settings_clear_data_success)
     val exportSuccessMsg = stringResource(R.string.settings_export_success)
     val importSuccessMsg = stringResource(R.string.settings_import_success)
     val exportErrorMsg = stringResource(R.string.settings_export_error)
     val importErrorMsg = stringResource(R.string.settings_import_error)
+    val resetSuccessMsg = stringResource(R.string.settings_reset_success)
 
     val exportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("application/json")
@@ -74,17 +81,28 @@ fun SettingsScreen(navController: NavController) {
     }
 
     LaunchedEffect(uiState.message) {
+        when (uiState.message) {
+            "clear_success", "reset_success" -> nameInput = ""
+        }
         val msg = when (uiState.message) {
             "clear_success" -> clearSuccessMsg
             "export_success" -> exportSuccessMsg
             "import_success" -> importSuccessMsg
             "export_error" -> exportErrorMsg
             "import_error" -> importErrorMsg
+            "reset_success" -> resetSuccessMsg
             else -> null
         }
         if (msg != null) {
             snackbarHostState.showSnackbar(msg)
             viewModel.dismissMessage()
+        }
+    }
+
+    LaunchedEffect(uiState.navigateToHome) {
+        if (uiState.navigateToHome) {
+            viewModel.dismissNavigateToHome()
+            navController.popBackStack(Routes.Home.route, inclusive = false)
         }
     }
 
@@ -131,7 +149,7 @@ fun SettingsScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(dimens.spacingLg))
 
-            // Profile section
+            // General section
             Text(
                 text = stringResource(R.string.settings_section_general),
                 style = typo.label,
@@ -144,7 +162,8 @@ fun SettingsScreen(navController: NavController) {
                     onValueChange = { nameInput = it },
                     label = stringResource(R.string.settings_organizer_name),
                     placeholder = stringResource(R.string.settings_organizer_name_hint),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLength = 50
                 )
                 Spacer(modifier = Modifier.height(dimens.spacingXs))
                 TextButton(
@@ -157,6 +176,36 @@ fun SettingsScreen(navController: NavController) {
                         color = colors.accent,
                         modifier = Modifier.fillMaxWidth()
                     )
+                }
+                Divider(color = colors.divider)
+                // Theme selector
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = dimens.spacingMd, vertical = dimens.spacingSm),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = stringResource(R.string.settings_theme),
+                        style = typo.bodyLarge,
+                        color = colors.textPrimary
+                    )
+                    Row(horizontalArrangement = Arrangement.spacedBy(dimens.spacingSm)) {
+                        listOf("Light", "Dark").forEach { theme ->
+                            FilterChip(
+                                selected = selectedTheme == theme,
+                                onClick = { viewModel.updateTheme(theme) },
+                                label = { Text(text = theme, style = typo.caption) },
+                                colors = FilterChipDefaults.filterChipColors(
+                                    selectedContainerColor = colors.accent,
+                                    selectedLabelColor = colors.onAccent,
+                                    containerColor = colors.backgroundCard,
+                                    labelColor = colors.textSecondary
+                                )
+                            )
+                        }
+                    }
                 }
             }
 
